@@ -6,12 +6,12 @@ import prettier from 'eslint-config-prettier'
 
 export default [
   {
-    ignores: ['node_modules', '.nuxt', 'dist', '.eslintrc.cjs', 'nuxt.config.ts'], // 👈 ignore auto-generated stuff
+    ignores: ['node_modules', '.nuxt', 'dist', '.eslintrc.cjs', 'nuxt.config.ts'],
   },
   js.configs.recommended,
   ...vue.configs['flat/recommended'],
   {
-    files: ['**/*.ts', '**/*.vue'],
+    files: ['**/*.vue'],
     languageOptions: {
       parser: vue.parser,
       parserOptions: {
@@ -20,20 +20,42 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        module: 'readonly',
-        require: 'readonly',
-        console: 'readonly',
-        Buffer: 'readonly',
-        URL: 'readonly',
-        Response: 'readonly',
-        Headers: 'readonly',
+        File: 'readonly',
+        Blob: 'readonly',
+        FormData: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': ts,
+      vue,
+    },
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+    },
+  },
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      globals: {
+        File: 'readonly',
+        Blob: 'readonly',
+        FormData: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
       },
     },
     plugins: {
       '@typescript-eslint': ts,
     },
     rules: {
-      'vue/multi-word-component-names': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
