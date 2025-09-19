@@ -8,6 +8,6 @@ const props = defineProps<{
 }>()
 
 const iconComponent = computed(() => {
-  return defineAsyncComponent(() => import(`~/components/icon/${props.name}.vue`))
+  return defineAsyncComponent(() => import(`~/components/Icon/${props.name}.vue`))
 })
 </script>
